@@ -3,7 +3,8 @@ import GlassCard from "@/components/GlassCard";
 import StatCard from "@/components/StatCard";
 import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
-import { Award, BookOpen, Star, TrendingUp, Clock, CheckCircle, ArrowRight, Zap } from "lucide-react";
+import { Award, BookOpen, Star, TrendingUp, Clock, CheckCircle, ArrowRight, Zap, Sprout } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const activities = [
   { title: "AI Workshop 2025", credits: 3, date: "Feb 10, 2025", status: "verified" as const, type: "Workshop" },
@@ -18,6 +19,7 @@ const certificates = [
 ];
 
 const StudentDashboard = () => {
+  const navigate = useNavigate();
   const totalCredits = 42;
   const requiredCredits = 60;
   const progress = (totalCredits / requiredCredits) * 100;
@@ -109,6 +111,23 @@ const StudentDashboard = () => {
             </Button>
           </div>
         </div>
+
+        {/* Volunteering Credits Widget */}
+        <GlassCard className="flex items-center justify-between cursor-pointer hover:neon-glow" onClick={() => navigate("/student/volunteering")}>
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+              <Sprout className="w-6 h-6 text-emerald-400" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground">🌱 Volunteering Credits Earned</p>
+              <p className="text-xs text-muted-foreground">6 credits from 3 volunteering activities</p>
+            </div>
+          </div>
+          <div className="text-right">
+            <p className="text-xl font-bold text-emerald-400">6</p>
+            <p className="text-[10px] text-muted-foreground">credits</p>
+          </div>
+        </GlassCard>
 
         {/* DID Badge */}
         <GlassCard className="flex items-center justify-between" glow>

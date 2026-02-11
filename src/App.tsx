@@ -9,6 +9,9 @@ import StudentDashboard from "./pages/StudentDashboard";
 import FacultyDashboard from "./pages/FacultyDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import VolunteeringFeed from "./pages/VolunteeringFeed";
+import AcceptedVolunteering from "./pages/AcceptedVolunteering";
+import CreateVolunteering from "./pages/CreateVolunteering";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +25,10 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/student" element={<StudentDashboard />} />
+          <Route path="/student/volunteering" element={<VolunteeringFeed />} />
+          <Route path="/student/volunteering/accepted" element={<AcceptedVolunteering />} />
           <Route path="/faculty" element={<FacultyDashboard />} />
+          <Route path="/faculty/volunteering/create" element={<CreateVolunteering />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

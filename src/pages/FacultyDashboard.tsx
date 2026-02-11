@@ -3,7 +3,7 @@ import GlassCard from "@/components/GlassCard";
 import StatCard from "@/components/StatCard";
 import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Users, CheckCircle, Clock, Plus, Zap, BarChart3, FileCheck } from "lucide-react";
+import { BookOpen, Users, CheckCircle, Clock, Plus, Zap, BarChart3, FileCheck, Sprout } from "lucide-react";
 
 const activities = [
   { title: "AI Workshop 2025", participants: 45, status: "verified" as const, credits: 3, date: "Feb 10" },
@@ -86,6 +86,31 @@ const FacultyDashboard = () => {
                 </div>
               </div>
               <Button variant="neon" size="sm">Execute</Button>
+            </GlassCard>
+
+            {/* Volunteering Requests Panel */}
+            <GlassCard>
+              <div className="flex items-center gap-2 mb-3">
+                <Sprout className="w-4 h-4 text-emerald-400" />
+                <h4 className="text-sm font-semibold text-foreground">Volunteering Requests</h4>
+              </div>
+              <div className="space-y-2">
+                {[
+                  { title: "Campus Green Initiative", applicants: 8, status: "Active" },
+                  { title: "Peer Tutoring — DSA", applicants: 10, status: "Full" },
+                  { title: "Library Digitization", applicants: 3, status: "Active" },
+                ].map((req, i) => (
+                  <div key={i} className="flex items-center justify-between p-2.5 rounded-lg bg-secondary/40">
+                    <div>
+                      <p className="text-xs font-medium text-foreground">{req.title}</p>
+                      <p className="text-[10px] text-muted-foreground">{req.applicants} applicants</p>
+                    </div>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+                      req.status === "Full" ? "bg-muted text-muted-foreground" : "bg-emerald-500/10 text-emerald-400"
+                    }`}>{req.status}</span>
+                  </div>
+                ))}
+              </div>
             </GlassCard>
           </div>
 

@@ -3,7 +3,7 @@ import GlassCard from "@/components/GlassCard";
 import StatCard from "@/components/StatCard";
 import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
-import { Users, BookOpen, Shield, Activity, Settings, Search, MoreHorizontal, ArrowUpDown } from "lucide-react";
+import { Users, BookOpen, Shield, Activity, Settings, Search, MoreHorizontal, ArrowUpDown, Sprout } from "lucide-react";
 
 const users = [
   { name: "Alex Johnson", role: "Student", dept: "Computer Science", status: "Active", wallet: "0x7f8...3a2" },
@@ -122,6 +122,27 @@ const AdminDashboard = () => {
             ))}
           </div>
         </div>
+
+        {/* Community Engagement Stats */}
+        <GlassCard>
+          <div className="flex items-center gap-2 mb-4">
+            <Sprout className="w-5 h-5 text-emerald-400" />
+            <h3 className="text-sm font-semibold text-foreground">Community Engagement Stats</h3>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              { label: "Active Volunteers", value: "124" },
+              { label: "Open Requests", value: "18" },
+              { label: "Completed This Month", value: "47" },
+              { label: "Certificates Issued", value: "89" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center p-3 rounded-lg bg-secondary/40">
+                <p className="text-lg font-bold text-foreground">{stat.value}</p>
+                <p className="text-[10px] text-muted-foreground">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </GlassCard>
 
         {/* Governance */}
         <GlassCard glow>

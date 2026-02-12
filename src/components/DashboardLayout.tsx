@@ -2,9 +2,9 @@ import { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
-  LayoutDashboard, BookOpen, Award, User, LogOut, Menu, X,
+  LayoutDashboard, BookOpen, Award, User, LogOut, Menu,
   Users, FileCheck, Settings, Activity, Shield, ChevronLeft,
-  Wallet, Bell, Sprout
+  Wallet, Bell, Sprout, Home
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,13 +15,13 @@ interface NavItem {
 }
 
 const studentNav: NavItem[] = [
-  { label: "Dashboard", href: "/student", icon: LayoutDashboard },
+  { label: "Home", href: "/student", icon: LayoutDashboard },
   { label: "Activities", href: "/student/activities", icon: BookOpen },
   { label: "Volunteering", href: "/student/volunteering", icon: Sprout },
   { label: "My Volunteering", href: "/student/volunteering/accepted", icon: Award },
+  { label: "Profile / Portfolio", href: "/student/profile", icon: User },
   { label: "Certificates", href: "/student/certificates", icon: Award },
-  { label: "Portfolio", href: "/student/portfolio", icon: Activity },
-  { label: "Profile", href: "/student/profile", icon: User },
+  { label: "Settings", href: "/student/settings", icon: Settings },
 ];
 
 const facultyNav: NavItem[] = [

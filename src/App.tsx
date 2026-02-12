@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import VolunteeringFeed from "./pages/VolunteeringFeed";
 import AcceptedVolunteering from "./pages/AcceptedVolunteering";
 import CreateVolunteering from "./pages/CreateVolunteering";
+import StudentProfile from "./pages/StudentProfile";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/student" element={<StudentDashboard />} />
           <Route path="/student/volunteering" element={<VolunteeringFeed />} />
           <Route path="/student/volunteering/accepted" element={<AcceptedVolunteering />} />
+          <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/faculty" element={<FacultyDashboard />} />
           <Route path="/faculty/volunteering/create" element={<CreateVolunteering />} />
           <Route path="/admin" element={<AdminDashboard />} />

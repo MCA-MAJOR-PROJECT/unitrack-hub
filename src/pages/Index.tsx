@@ -4,7 +4,7 @@ import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
 import {
   Sprout, BookOpen, Award, TrendingUp, ArrowRight, Shield,
-  Megaphone, Star, Clock, Wallet, CheckCircle
+  Star, Clock, Wallet, CheckCircle
 } from "lucide-react";
 
 const volunteeringOpportunities = [
@@ -139,26 +139,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Announcements + Credit Summary */}
+        {/* Credit Progress + Recent Achievements */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <section>
-            <div className="flex items-center gap-2 mb-4">
-              <Megaphone className="w-5 h-5 text-neon-cyan" />
-              <h2 className="text-lg font-bold text-foreground">Recent Announcements</h2>
-            </div>
-            <div className="space-y-3">
-              {announcements.map((a, i) => (
-                <GlassCard key={i} className="!p-4 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-foreground">{a.title}</p>
-                    <p className="text-xs text-muted-foreground">{a.date}</p>
-                  </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground font-medium">{a.tag}</span>
-                </GlassCard>
-              ))}
-            </div>
-          </section>
-
           <section>
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="w-5 h-5 text-primary" />
@@ -187,6 +169,31 @@ const Index = () => {
                 </div>
               </div>
             </GlassCard>
+          </section>
+
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+              <Award className="w-5 h-5 text-neon-cyan" />
+              <h2 className="text-lg font-bold text-foreground">Recent Achievements</h2>
+            </div>
+            <div className="space-y-3">
+              {[
+                { title: "Blockchain Fundamentals", tag: "Academic", date: "Jan 2025", icon: "🏆" },
+                { title: "Campus Green Initiative", tag: "Volunteering", date: "Jan 2025", icon: "🌱" },
+                { title: "AI Research Assistant", tag: "Research", date: "Feb 2025", icon: "🧠" },
+              ].map((a, i) => (
+                <GlassCard key={i} className="!p-4 flex items-center justify-between hover:neon-glow cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <span className="text-xl">{a.icon}</span>
+                    <div>
+                      <p className="text-sm font-medium text-foreground">{a.title}</p>
+                      <p className="text-xs text-muted-foreground">{a.date}</p>
+                    </div>
+                  </div>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground font-medium">{a.tag}</span>
+                </GlassCard>
+              ))}
+            </div>
           </section>
         </div>
       </main>

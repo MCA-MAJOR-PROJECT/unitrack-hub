@@ -33,16 +33,22 @@ const StudentDashboard = () => {
             <h1 className="text-2xl font-bold text-foreground">Welcome back, Alex 👋</h1>
             <p className="text-sm text-muted-foreground mt-1">Track your academic activities and blockchain-verified credits</p>
           </div>
-          <Button variant="neon">
-            <Zap className="w-4 h-4" /> Enroll in Activity
-          </Button>
+          <div className="flex gap-2 flex-wrap">
+            <Button variant="neon" onClick={() => navigate("/student/volunteering")}>
+              <Sprout className="w-4 h-4" /> Apply Volunteering
+            </Button>
+            <Button variant="neon-outline">
+              <Zap className="w-4 h-4" /> Enroll Activity
+            </Button>
+          </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           <StatCard label="Total Credits" value={totalCredits} icon={Star} trend="12% this month" trendUp />
-          <StatCard label="Activities" value={12} icon={BookOpen} trend="3 this week" trendUp />
+          <StatCard label="Volunteering" value={6} icon={Sprout} trend="3 roles" trendUp />
           <StatCard label="Certificates" value={5} icon={Award} trend="1 pending" />
+          <StatCard label="Activities" value={12} icon={BookOpen} trend="3 this week" trendUp />
           <StatCard label="Rank" value="#15" icon={TrendingUp} trend="Up 3 spots" trendUp />
         </div>
 

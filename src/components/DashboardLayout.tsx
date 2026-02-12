@@ -7,6 +7,7 @@ import {
   Wallet, Bell, Sprout, Home
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 interface NavItem {
   label: string;
@@ -165,10 +166,12 @@ const DashboardLayout = ({ children, role, userName = "User" }: DashboardLayoutP
           </div>
         </header>
 
-        <main className="flex-1 overflow-auto p-4 md:p-6">
+        <main className="flex-1 overflow-auto p-4 md:p-6 pb-20 md:pb-6">
           {children}
         </main>
       </div>
+
+      {role === "student" && <MobileBottomNav />}
     </div>
   );
 };

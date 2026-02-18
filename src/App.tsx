@@ -15,6 +15,8 @@ import CreateVolunteering from "./pages/CreateVolunteering";
 import StudentProfile from "./pages/StudentProfile";
 import ActivityDetails from "./pages/ActivityDetails";
 import CertificateWallet from "./pages/CertificateWallet";
+import ActivitiesFeed from "./pages/ActivitiesFeed";
+import StudentSettings from "./pages/StudentSettings";
 
 const queryClient = new QueryClient();
 
@@ -28,11 +30,13 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/student" element={<StudentDashboard />} />
+          <Route path="/student/activities" element={<ActivitiesFeed />} />
           <Route path="/student/volunteering" element={<VolunteeringFeed />} />
           <Route path="/student/volunteering/accepted" element={<AcceptedVolunteering />} />
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/activity/:id" element={<ActivityDetails />} />
           <Route path="/student/certificates" element={<CertificateWallet />} />
+          <Route path="/student/settings" element={<StudentSettings />} />
           <Route path="/faculty" element={<FacultyDashboard />} />
           <Route path="/faculty/volunteering/create" element={<CreateVolunteering />} />
           <Route path="/admin" element={<AdminDashboard />} />

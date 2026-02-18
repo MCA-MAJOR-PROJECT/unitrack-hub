@@ -1,13 +1,14 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, BookOpen, Award, User, LogOut, Menu,
   Users, FileCheck, Settings, Activity, Shield, ChevronLeft,
-  Wallet, Bell, Sprout, Home
+  Wallet, Bell, Sprout, Wifi
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import { toast } from "@/hooks/use-toast";
 
 interface NavItem {
   label: string;
@@ -53,6 +54,17 @@ const DashboardLayout = ({ children, role, userName = "User" }: DashboardLayoutP
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Demo blockchain toast notification
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      toast({
+        title: "🔗 Blockchain Event",
+        description: "Volunteer Certificate Issued ✔ — Campus Green Initiative",
+      });
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const navItems = role === "student" ? studentNav : role === "faculty" ? facultyNav : adminNav;
   const roleLabel = role.charAt(0).toUpperCase() + role.slice(1);
@@ -152,13 +164,21 @@ const DashboardLayout = ({ children, role, userName = "User" }: DashboardLayoutP
             <h2 className="text-sm font-medium text-muted-foreground">{roleLabel} Dashboard</h2>
           </div>
           <div className="flex items-center gap-2">
+            {/* Blockchain Network Status Badge */}
+            <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neon-cyan/10 border border-neon-cyan/20">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-cyan opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-neon-cyan" />
+              </span>
+              <span className="text-[10px] font-medium text-neon-cyan">Network: Connected ✔</span>
+            </div>
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="w-4 h-4" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-neon-cyan rounded-full animate-pulse-glow" />
             </Button>
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary">
               <Wallet className="w-4 h-4 text-neon-cyan" />
-              <span className="text-xs font-medium text-foreground">0x7f...3a2b</span>
+              <span className="text-xs font-medium text-foreground hidden sm:block">0x7f...3a2b</span>
             </div>
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-neon-purple to-neon-blue flex items-center justify-center text-xs font-bold text-primary-foreground">
               {userName.charAt(0).toUpperCase()}

@@ -7,6 +7,15 @@ import {
   Star, Clock, Wallet, CheckCircle
 } from "lucide-react";
 
+const ACTIVITY_ID_MAP: Record<string, string> = {
+  "Campus Green Initiative": "1",
+  "Peer Tutoring — Data Structures": "2",
+  "Tech Fest Coordination": "3",
+  "Library Digitization Drive": "4",
+  "AI Research Assistant": "5",
+  "Waste Audit & Recycling": "6",
+};
+
 const volunteeringOpportunities = [
   { title: "Campus Green Initiative", category: "Sustainability & Environmental", credits: 4, duration: "3 weeks", spots: 12, icon: "🌿" },
   { title: "Peer Tutoring — Data Structures", category: "Academic Support", credits: 3, duration: "1 month", spots: 8, icon: "📚" },
@@ -86,7 +95,11 @@ const Index = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {volunteeringOpportunities.map((v, i) => (
-              <GlassCard key={i} className="!p-5 hover:neon-glow group relative overflow-hidden">
+              <GlassCard
+                key={i}
+                className="!p-5 hover:neon-glow group relative overflow-hidden cursor-pointer"
+                onClick={() => navigate(`/student/activity/${ACTIVITY_ID_MAP[v.title] || "1"}`)}
+              >
                 <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full -translate-y-8 translate-x-8 group-hover:bg-emerald-500/10 transition-colors" />
                 <div className="flex items-start justify-between mb-3">
                   <span className="text-2xl">{v.icon}</span>
@@ -94,7 +107,7 @@ const Index = () => {
                     {v.category.split(" ")[0]}
                   </span>
                 </div>
-                <h3 className="text-sm font-semibold text-foreground mb-1">{v.title}</h3>
+                <h3 className="text-sm font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{v.title}</h3>
                 <p className="text-xs text-muted-foreground mb-3">{v.category}</p>
                 <div className="flex items-center gap-3 text-xs text-muted-foreground mb-4">
                   <span className="flex items-center gap-1"><Star className="w-3 h-3 text-primary" /> {v.credits} credits</span>
@@ -102,8 +115,13 @@ const Index = () => {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-muted-foreground">{v.spots} spots left</span>
-                  <Button variant="neon" size="sm" className="h-7 text-xs" onClick={() => navigate("/login")}>
-                    Apply
+                  <Button
+                    variant="neon"
+                    size="sm"
+                    className="h-7 text-xs"
+                    onClick={(e) => { e.stopPropagation(); navigate(`/student/activity/${ACTIVITY_ID_MAP[v.title] || "1"}`); }}
+                  >
+                    View Details
                   </Button>
                 </div>
                 <div className="mt-3 pt-3 border-t border-border/50">

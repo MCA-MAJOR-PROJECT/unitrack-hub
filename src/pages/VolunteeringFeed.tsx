@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/DashboardLayout";
 import GlassCard from "@/components/GlassCard";
 import BlockchainBadge from "@/components/BlockchainBadge";
@@ -76,6 +77,7 @@ const categoryColors: Record<string, string> = {
 };
 
 const VolunteeringFeed = () => {
+  const navigate = useNavigate();
   return (
     <DashboardLayout role="student" userName="Alex">
       <div className="space-y-6 max-w-7xl">
@@ -114,7 +116,11 @@ const VolunteeringFeed = () => {
         {/* Feed */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {volunteeringOpportunities.map((vol, i) => (
-            <GlassCard key={i} className="!p-5 flex flex-col justify-between hover:neon-glow cursor-pointer">
+            <GlassCard
+              key={i}
+              className="!p-5 flex flex-col justify-between hover:neon-glow cursor-pointer group"
+              onClick={() => navigate(`/student/activity/${i + 1}`)}
+            >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <div className="flex items-center gap-2">
@@ -129,7 +135,7 @@ const VolunteeringFeed = () => {
                     </div>
                   )}
                 </div>
-                <h3 className="text-sm font-semibold text-foreground mb-1">{vol.title}</h3>
+                <h3 className="text-sm font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">{vol.title}</h3>
                 <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{vol.description}</p>
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {vol.skills.map((skill) => (
@@ -150,8 +156,9 @@ const VolunteeringFeed = () => {
                   size="sm"
                   className="w-full"
                   disabled={vol.status === "full"}
+                  onClick={(e) => { e.stopPropagation(); navigate(`/student/activity/${i + 1}`); }}
                 >
-                  {vol.status === "full" ? "Fully Booked" : "Apply Now"}
+                  {vol.status === "full" ? "Fully Booked" : "View & Apply"}
                 </Button>
               </div>
             </GlassCard>

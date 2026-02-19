@@ -82,6 +82,23 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Stats Grid */}
+        <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[
+            { label: "Total Credits", value: "42", trend: "↑ 12% this month", up: true, icon: "⭐" },
+            { label: "Volunteering", value: "6", trend: "↑ 3 roles", up: true, icon: "🌱" },
+            { label: "Certificates", value: "5", trend: "↓ 1 pending", up: false, icon: "📜" },
+            { label: "Activities", value: "12", trend: "↑ 3 this week", up: true, icon: "📚" },
+            { label: "Rank", value: "#15", trend: "↑ Up 3 spots", up: true, icon: "🏆" },
+          ].map((s, i) => (
+            <GlassCard key={i} className="!p-4 text-center hover:neon-glow transition-all">
+              <span className="text-xl mb-1 block">{s.icon}</span>
+              <p className="text-xs text-muted-foreground font-medium">{s.label}</p>
+              <p className="text-2xl font-bold text-foreground mt-1">{s.value}</p>
+              <p className={`text-[10px] mt-1 font-medium ${s.up ? "text-neon-cyan" : "text-destructive"}`}>{s.trend}</p>
+            </GlassCard>
+          ))}
+        </section>
         {/* 🌱 Volunteering Opportunities — Top Section */}
         <section>
           <div className="flex items-center justify-between mb-4">

@@ -17,6 +17,10 @@ import ActivityDetails from "./pages/ActivityDetails";
 import CertificateWallet from "./pages/CertificateWallet";
 import ActivitiesFeed from "./pages/ActivitiesFeed";
 import StudentSettings from "./pages/StudentSettings";
+import FacultyCreateActivity from "./pages/FacultyCreateActivity";
+import FacultyVerify from "./pages/FacultyVerify";
+import FacultyAnalytics from "./pages/FacultyAnalytics";
+import FacultyProfile from "./pages/FacultyProfile";
 
 const queryClient = new QueryClient();
 
@@ -38,7 +42,11 @@ const App = () => (
           <Route path="/student/certificates" element={<CertificateWallet />} />
           <Route path="/student/settings" element={<StudentSettings />} />
           <Route path="/faculty" element={<FacultyDashboard />} />
+          <Route path="/faculty/create" element={<FacultyCreateActivity />} />
           <Route path="/faculty/volunteering/create" element={<CreateVolunteering />} />
+          <Route path="/faculty/verify" element={<FacultyVerify />} />
+          <Route path="/faculty/analytics" element={<FacultyAnalytics />} />
+          <Route path="/faculty/profile" element={<FacultyProfile />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

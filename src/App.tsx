@@ -21,6 +21,10 @@ import FacultyCreateActivity from "./pages/FacultyCreateActivity";
 import FacultyVerify from "./pages/FacultyVerify";
 import FacultyAnalytics from "./pages/FacultyAnalytics";
 import FacultyProfile from "./pages/FacultyProfile";
+import AdminUsers from "./pages/AdminUsers";
+import AdminActivities from "./pages/AdminActivities";
+import AdminBlockchain from "./pages/AdminBlockchain";
+import AdminSettings from "./pages/AdminSettings";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +52,10 @@ const App = () => (
           <Route path="/faculty/analytics" element={<FacultyAnalytics />} />
           <Route path="/faculty/profile" element={<FacultyProfile />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/activities" element={<AdminActivities />} />
+          <Route path="/admin/blockchain" element={<AdminBlockchain />} />
+          <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

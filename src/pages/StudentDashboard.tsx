@@ -44,7 +44,7 @@ const StudentDashboard = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
           <StatCard label="Total Credits" value={totalCredits} icon={Star} trend="12% this month" trendUp />
           <StatCard label="Volunteering" value={6} icon={Sprout} trend="3 roles" trendUp />
           <StatCard label="Certificates" value={5} icon={Award} trend="1 pending" />

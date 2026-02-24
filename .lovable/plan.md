@@ -1,29 +1,49 @@
 
 
-## Issues Identified
+# Add Registration Page for All User Types
 
-### 1. Landing Page Before Login
-The page at `/` (Index.tsx) is a public landing/marketing page that shows before login. Two options:
-- **Option A**: Remove it and make `/login` the default route
-- **Option B**: Keep it as a landing page (current behavior is intentional — most apps have a landing page before login)
+## Overview
+Create a single registration page where users can sign up by selecting their role (Student, Faculty, or Admin), entering their details, and creating an account. The page will match the existing login page design with the neon/glass theme.
 
-I will redirect `/` to `/login` so users go straight to the login page, since this is a campus platform where all users need to authenticate first.
+## What Will Be Built
 
-### 2. Student Dashboard Stats — List Instead of Grid on Mobile
-The stats section on `/student` uses `grid-cols-1` on mobile, making it look like a vertical list. I will change it to a 2-column grid on mobile (`grid-cols-2`) to match the desired layout, with the 5th card (Rank) spanning full width at the bottom.
+### New Registration Page
+A new `Register.tsx` page with:
+- **Role selector** (same 3-button grid as login: Student, Faculty, Admin)
+- **Common fields**: Full Name, Email, Password, Confirm Password
+- **Role-specific fields**:
+  - Student: Student ID, Department, Year of Study
+  - Faculty: Faculty ID, Department, Designation
+  - Admin: Admin Code (an access code to prevent unauthorized admin signups)
+- **Wallet connect option** (same as login page)
+- **Link to login** ("Already have an account? Sign In")
 
----
+### Updated Login Page
+- Add a **"Don't have an account? Register"** link below the sign-in form
 
-## Technical Changes
+### Updated Routing
+- Add `/register` route in `App.tsx`
 
-### File 1: `src/App.tsx`
-- Change the `/` route to redirect to `/login` instead of showing the Index landing page
-- Keep the Index page accessible at a route like `/welcome` if needed, or simply remove it from routing
+## Technical Details
 
-### File 2: `src/pages/StudentDashboard.tsx` (line 47)
-- Change `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5` to `grid grid-cols-2 lg:grid-cols-5`
-- This makes stats display as a 2-column grid on all screen sizes, matching the reference screenshot
+### File 1: `src/pages/Register.tsx` (NEW)
+- Mirrors the Login page layout and styling (background effects, GlassCard, role selector)
+- Uses `useState` to toggle between roles and show/hide role-specific fields
+- Form validation for matching passwords, required fields
+- On submit, navigates to the selected role's dashboard (same mock behavior as login)
+- Includes password visibility toggle and wallet connect button
 
-### File 3: `src/pages/Index.tsx` (Stats Grid section)
-- Similarly update the home page stats grid from `grid-cols-2 sm:grid-cols-3 lg:grid-cols-5` — ensure it also uses a proper grid on mobile
+### File 2: `src/pages/Login.tsx` (EDIT)
+- Add a "Don't have an account? Register" link at the bottom, linking to `/register`
 
+### File 3: `src/App.tsx` (EDIT)
+- Import `Register` component
+- Add `<Route path="/register" element={<Register />} />`
+
+## Visual Design
+The registration page will look nearly identical to the login page, with the same:
+- Centered card layout with glass effect
+- UniTrack logo and branding at top
+- Role selection buttons (Student / Faculty / Admin)
+- Neon-styled submit button
+- Blockchain footer text

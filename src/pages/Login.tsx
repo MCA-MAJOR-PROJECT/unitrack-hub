@@ -113,6 +113,11 @@ const Login = () => {
           </Button>
 
           <p className="text-xs text-center text-muted-foreground mt-4">
+            Don't have an account?{" "}
+            <a href="/register" className="text-primary hover:underline">Register</a>
+          </p>
+
+          <p className="text-xs text-center text-muted-foreground mt-2">
             Secured by blockchain · Decentralized Identity
           </p>
         </GlassCard>

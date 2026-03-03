@@ -164,6 +164,15 @@ const VolunteeringFeed = () => {
             </GlassCard>
           ))}
         </div>
+
+        {/* Empty State */}
+        {volunteeringOpportunities.length === 0 && (
+          <GlassCard className="text-center py-12">
+            <Sprout className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
+            <p className="text-sm font-medium text-foreground">No volunteering yet.</p>
+            <p className="text-xs text-muted-foreground mt-1">Start contributing to your campus today 🌱</p>
+          </GlassCard>
+        )}
       </div>
     </DashboardLayout>
   );

@@ -4,8 +4,8 @@ import { Home, BookOpen, Sprout, User, Award } from "lucide-react";
 
 const items = [
   { label: "Home", href: "/student", icon: Home },
-  { label: "Activities", href: "/student/activities", icon: BookOpen },
   { label: "Volunteer", href: "/student/volunteering", icon: Sprout, highlight: true },
+  { label: "Activities", href: "/student/activities", icon: BookOpen },
   { label: "Portfolio", href: "/student/profile", icon: User },
   { label: "Wallet", href: "/student/certificates", icon: Award },
 ];

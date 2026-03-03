@@ -6,7 +6,7 @@ import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
 import {
   BookOpen, Search, Calendar, Clock, Award, Users, Filter, 
-  ChevronRight, CheckCircle, Star
+  ChevronRight, CheckCircle, Star, Sprout
 } from "lucide-react";
 
 const activities = [
@@ -126,7 +126,7 @@ const ActivitiesFeed = () => {
 
   return (
     <DashboardLayout role="student" userName="Alex">
-      <div className="space-y-6 max-w-7xl">
+      <div className="space-y-8 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
@@ -147,6 +147,17 @@ const ActivitiesFeed = () => {
             />
           </div>
         </div>
+
+        {/* Volunteering Priority CTA */}
+        <GlassCard className="!p-3 flex items-center justify-between border-emerald-500/20">
+          <div className="flex items-center gap-2">
+            <Sprout className="w-4 h-4 text-emerald-400" />
+            <span className="text-xs text-muted-foreground">🌱 Volunteering opportunities are prioritized for community engagement.</span>
+          </div>
+          <Button variant="neon-outline" size="sm" className="h-7 text-xs shrink-0" onClick={() => navigate("/student/volunteering")}>
+            Browse Volunteering
+          </Button>
+        </GlassCard>
 
         {/* Stats Strip */}
         <div className="grid grid-cols-3 gap-3">

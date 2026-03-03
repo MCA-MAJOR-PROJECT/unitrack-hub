@@ -26,7 +26,7 @@ const StudentDashboard = () => {
 
   return (
     <DashboardLayout role="student" userName="Alex">
-      <div className="space-y-6 max-w-7xl">
+      <div className="space-y-8 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
@@ -55,7 +55,7 @@ const StudentDashboard = () => {
         {/* Credit Progress */}
         <GlassCard>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-semibold text-foreground">Credit Progress</h3>
+            <h3 className="text-base font-semibold text-foreground">Credit Progress</h3>
             <span className="text-xs text-muted-foreground">{totalCredits}/{requiredCredits} credits</span>
           </div>
           <div className="w-full h-3 bg-secondary rounded-full overflow-hidden">
@@ -70,7 +70,7 @@ const StudentDashboard = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Activity Feed */}
           <div className="lg:col-span-2 space-y-3">
-            <h3 className="text-sm font-semibold text-foreground">Recent Activities</h3>
+            <h3 className="text-base font-semibold text-foreground mb-2">Recent Activities</h3>
             {activities.map((activity, i) => (
               <GlassCard key={i} className="!p-4 flex items-center justify-between hover:neon-glow cursor-pointer">
                 <div className="flex items-center gap-3">
@@ -96,7 +96,7 @@ const StudentDashboard = () => {
 
           {/* Certificates */}
           <div className="space-y-3">
-            <h3 className="text-sm font-semibold text-foreground">Digital Certificates</h3>
+            <h3 className="text-base font-semibold text-foreground mb-2">Digital Certificates</h3>
             {certificates.map((cert, i) => (
               <GlassCard key={i} className="!p-4 gradient-border">
                 <div className="flex items-center gap-2 mb-2">

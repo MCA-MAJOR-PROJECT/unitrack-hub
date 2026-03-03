@@ -82,29 +82,12 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Stats Grid */}
-        <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {[
-            { label: "Total Credits", value: "42", trend: "↑ 12% this month", up: true, icon: "⭐" },
-            { label: "Volunteering", value: "6", trend: "↑ 3 roles", up: true, icon: "🌱" },
-            { label: "Certificates", value: "5", trend: "↓ 1 pending", up: false, icon: "📜" },
-            { label: "Activities", value: "12", trend: "↑ 3 this week", up: true, icon: "📚" },
-            { label: "Rank", value: "#15", trend: "↑ Up 3 spots", up: true, icon: "🏆" },
-          ].map((s, i) => (
-            <GlassCard key={i} className="!p-4 text-center hover:neon-glow transition-all">
-              <span className="text-xl mb-1 block">{s.icon}</span>
-              <p className="text-xs text-muted-foreground font-medium">{s.label}</p>
-              <p className="text-2xl font-bold text-foreground mt-1">{s.value}</p>
-              <p className={`text-[10px] mt-1 font-medium ${s.up ? "text-neon-cyan" : "text-destructive"}`}>{s.trend}</p>
-            </GlassCard>
-          ))}
-        </section>
         {/* 🌱 Volunteering Opportunities — Top Section */}
         <section>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Sprout className="w-5 h-5 text-emerald-400" />
-              <h2 className="text-lg font-bold text-foreground">🌱 Volunteering Opportunities</h2>
+              <h2 className="text-xl font-bold text-foreground">🌱 Volunteering Opportunities</h2>
             </div>
             <Button variant="neon-outline" size="sm" onClick={() => navigate("/login")}>
               View All <ArrowRight className="w-3 h-3" />
@@ -149,37 +132,12 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Academic Activities */}
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-primary" />
-              <h2 className="text-lg font-bold text-foreground">Academic Activities</h2>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {academicActivities.map((a, i) => (
-              <GlassCard key={i} className="!p-4 hover:neon-glow cursor-pointer">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">{a.type}</span>
-                  <BlockchainBadge status={a.status} className="!text-[9px]" />
-                </div>
-                <h3 className="text-sm font-semibold text-foreground mb-1">{a.title}</h3>
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span>{a.date}</span>
-                  <span className="font-bold text-primary">+{a.credits} credits</span>
-                </div>
-              </GlassCard>
-            ))}
-          </div>
-        </section>
-
         {/* Credit Progress + Recent Achievements */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <section>
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="w-5 h-5 text-primary" />
-              <h2 className="text-lg font-bold text-foreground">Credit Progress Summary</h2>
+              <h2 className="text-xl font-bold text-foreground">Credit Progress Summary</h2>
             </div>
             <GlassCard glow>
               <div className="space-y-4">
@@ -209,7 +167,7 @@ const Index = () => {
           <section>
             <div className="flex items-center gap-2 mb-4">
               <Award className="w-5 h-5 text-neon-cyan" />
-              <h2 className="text-lg font-bold text-foreground">Recent Achievements</h2>
+              <h2 className="text-xl font-bold text-foreground">Recent Achievements</h2>
             </div>
             <div className="space-y-3">
               {[
@@ -231,6 +189,31 @@ const Index = () => {
             </div>
           </section>
         </div>
+
+        {/* Academic Activities */}
+        <section>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-5 h-5 text-primary" />
+              <h2 className="text-xl font-bold text-foreground">Academic Activities</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {academicActivities.map((a, i) => (
+              <GlassCard key={i} className="!p-4 hover:neon-glow cursor-pointer">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-primary/10 text-primary font-medium">{a.type}</span>
+                  <BlockchainBadge status={a.status} className="!text-[9px]" />
+                </div>
+                <h3 className="text-sm font-semibold text-foreground mb-1">{a.title}</h3>
+                <div className="flex items-center justify-between text-xs text-muted-foreground">
+                  <span>{a.date}</span>
+                  <span className="font-bold text-primary">+{a.credits} credits</span>
+                </div>
+              </GlassCard>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );

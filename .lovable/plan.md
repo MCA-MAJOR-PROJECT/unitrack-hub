@@ -1,49 +1,65 @@
 
 
-# Add Registration Page for All User Types
+# UniTrack Hierarchy & Polish Update
 
-## Overview
-Create a single registration page where users can sign up by selecting their role (Student, Faculty, or Admin), entering their details, and creating an account. The page will match the existing login page design with the neon/glass theme.
+## 1. Navigation Reorder
 
-## What Will Be Built
+**`src/components/DashboardLayout.tsx`** — Reorder `studentNav` array to: Home → Volunteering → My Volunteering → Activities → Profile/Portfolio → Certificates → Settings.
 
-### New Registration Page
-A new `Register.tsx` page with:
-- **Role selector** (same 3-button grid as login: Student, Faculty, Admin)
-- **Common fields**: Full Name, Email, Password, Confirm Password
-- **Role-specific fields**:
-  - Student: Student ID, Department, Year of Study
-  - Faculty: Faculty ID, Department, Designation
-  - Admin: Admin Code (an access code to prevent unauthorized admin signups)
-- **Wallet connect option** (same as login page)
-- **Link to login** ("Already have an account? Sign In")
+**`src/components/MobileBottomNav.tsx`** — Reorder `items` array to: Home → Volunteer → Activities → Portfolio → Wallet.
 
-### Updated Login Page
-- Add a **"Don't have an account? Register"** link below the sign-in form
+## 2. Index.tsx — Volunteering First Layout
 
-### Updated Routing
-- Add `/register` route in `App.tsx`
+Reorder the sections inside `<main>`:
+1. Hero (unchanged)
+2. Volunteering Opportunities section (move up from position 3)
+3. Credit Progress + Recent Achievements grid (move up)
+4. Academic Activities section (move down)
 
-## Technical Details
+Remove the Stats Grid section (lines 86-101) — it duplicates dashboard data and clutters the landing page.
 
-### File 1: `src/pages/Register.tsx` (NEW)
-- Mirrors the Login page layout and styling (background effects, GlassCard, role selector)
-- Uses `useState` to toggle between roles and show/hide role-specific fields
-- Form validation for matching passwords, required fields
-- On submit, navigates to the selected role's dashboard (same mock behavior as login)
-- Includes password visibility toggle and wallet connect button
+## 3. Reduce Glow Intensity (index.css)
 
-### File 2: `src/pages/Login.tsx` (EDIT)
-- Add a "Don't have an account? Register" link at the bottom, linking to `/register`
+- `.neon-glow` box-shadow: reduce opacity values from `0.15`/`0.05` to `0.06`/`0.02`
+- `.neon-glow-blue`: same reduction
+- Across pages: change `hover:neon-glow` on non-interactive decorative cards — no change needed in CSS, the class itself gets toned down globally
 
-### File 3: `src/App.tsx` (EDIT)
-- Import `Register` component
-- Add `<Route path="/register" element={<Register />} />`
+## 4. Typography & Spacing
 
-## Visual Design
-The registration page will look nearly identical to the login page, with the same:
-- Centered card layout with glass effect
-- UniTrack logo and branding at top
-- Role selection buttons (Student / Faculty / Admin)
-- Neon-styled submit button
-- Blockchain footer text
+**`src/pages/StudentDashboard.tsx`**: Change top-level `space-y-6` to `space-y-8`. Change section headers `text-sm font-semibold` to `text-base font-semibold` with `mb-2` after headings.
+
+**`src/pages/Index.tsx`**: Section headers already `text-lg font-bold` — upgrade to `text-xl font-bold`.
+
+**`src/pages/ActivitiesFeed.tsx`**: `space-y-6` → `space-y-8`.
+
+## 5. ActivitiesFeed — Volunteering Priority CTA
+
+Insert a subtle glass banner below the header section (after line 149):
+
+```
+<GlassCard className="!p-3 flex items-center justify-between border-emerald-500/20">
+  <div className="flex items-center gap-2">
+    <Sprout className="w-4 h-4 text-emerald-400" />
+    <span className="text-xs text-muted-foreground">🌱 Volunteering opportunities are prioritized for community engagement.</span>
+  </div>
+  <Button variant="neon-outline" size="sm" className="h-7 text-xs" onClick={() => navigate("/student/volunteering")}>
+    Browse Volunteering
+  </Button>
+</GlassCard>
+```
+
+Import `Sprout` from lucide-react in ActivitiesFeed.
+
+## Files Modified
+
+| File | Change |
+|------|--------|
+| `src/components/DashboardLayout.tsx` | Reorder `studentNav` array |
+| `src/components/MobileBottomNav.tsx` | Reorder `items` array |
+| `src/pages/Index.tsx` | Remove stats grid, reorder sections, upgrade heading sizes |
+| `src/index.css` | Reduce glow opacity values |
+| `src/pages/StudentDashboard.tsx` | Spacing and typography tweaks |
+| `src/pages/ActivitiesFeed.tsx` | Add volunteering CTA banner, spacing update |
+
+No new files. No components removed. No new routes.
+

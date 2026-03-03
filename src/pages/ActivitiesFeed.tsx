@@ -8,6 +8,7 @@ import {
   BookOpen, Search, Calendar, Clock, Award, Users, Filter, 
   ChevronRight, CheckCircle, Star, Sprout
 } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const activities = [
   {
@@ -111,11 +112,13 @@ const typeColors: Record<string, string> = {
   Seminar: "bg-rose-500/10 text-rose-400 border-rose-500/20",
 };
 
+const broadCategories = ["All", "Academic", "Volunteering", "Research"];
 const allTypes = ["All", "Workshop", "Bootcamp", "Research", "Event", "Certification", "Seminar"];
 
 const ActivitiesFeed = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("All");
+  const [broadCategory, setBroadCategory] = useState("All");
   const [search, setSearch] = useState("");
 
   const filtered = activities.filter((a) => {
@@ -147,6 +150,15 @@ const ActivitiesFeed = () => {
             />
           </div>
         </div>
+
+        {/* Broad Category Tabs */}
+        <Tabs value={broadCategory} onValueChange={setBroadCategory}>
+          <TabsList className="bg-secondary/60">
+            {broadCategories.map(cat => (
+              <TabsTrigger key={cat} value={cat} className="text-xs">{cat}</TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
 
         {/* Volunteering Priority CTA */}
         <GlassCard className="!p-3 flex items-center justify-between border-emerald-500/20">

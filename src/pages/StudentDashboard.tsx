@@ -3,7 +3,7 @@ import GlassCard from "@/components/GlassCard";
 import StatCard from "@/components/StatCard";
 import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
-import { Award, BookOpen, Star, TrendingUp, Clock, CheckCircle, ArrowRight, Zap, Sprout } from "lucide-react";
+import { Award, BookOpen, Star, TrendingUp, Clock, CheckCircle, ArrowRight, Zap, Sprout, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const activities = [
@@ -132,6 +132,29 @@ const StudentDashboard = () => {
           <div className="text-right">
             <p className="text-xl font-bold text-emerald-400">6</p>
             <p className="text-[10px] text-muted-foreground">credits</p>
+          </div>
+        </GlassCard>
+
+        {/* 🔗 Blockchain Transparency Widget */}
+        <GlassCard className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-xl bg-neon-cyan/10 flex items-center justify-center">
+              <Shield className="w-6 h-6 text-neon-cyan" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground">🔗 Blockchain Records</p>
+              <p className="text-xs text-muted-foreground">Your on-chain academic footprint</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="text-center">
+              <p className="text-xl font-bold text-foreground">12</p>
+              <p className="text-[10px] text-muted-foreground">On-Chain Records</p>
+            </div>
+            <div className="text-center">
+              <p className="text-xl font-bold text-neon-cyan">8</p>
+              <p className="text-[10px] text-muted-foreground">Verified Credentials</p>
+            </div>
           </div>
         </GlassCard>
 

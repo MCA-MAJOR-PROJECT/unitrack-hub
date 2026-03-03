@@ -118,7 +118,7 @@ const Login = () => {
           </p>
 
           <p className="text-xs text-center text-muted-foreground mt-2">
-            Secured by blockchain · Decentralized Identity
+            🔐 Secure academic record system powered by blockchain.
           </p>
         </GlassCard>
       </div>

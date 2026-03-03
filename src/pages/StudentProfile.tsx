@@ -4,7 +4,7 @@ import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
 import {
   User, Wallet, Award, BookOpen, Sprout, Clock, CheckCircle,
-  Download, ExternalLink, Shield, Star, Users, Leaf
+  Download, ExternalLink, Shield, Star, Users, Leaf, TrendingUp, Link2
 } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
@@ -44,6 +44,10 @@ const categoryBadgeColors: Record<string, string> = {
 
 const StudentProfile = () => {
   const totalCredits = 42;
+  const volunteerHours = 50;
+  const activitiesCompleted = 12;
+  // Impact Score: weighted composite
+  const impactScore = Math.round((volunteerHours * 0.4) + (activitiesCompleted * 0.3 * 10) + (totalCredits * 0.3 * 2));
 
   return (
     <DashboardLayout role="student" userName="Alex">
@@ -72,6 +76,23 @@ const StudentProfile = () => {
               <p className="text-3xl font-bold gradient-text">{totalCredits}</p>
               <p className="text-[10px] text-muted-foreground">Total Credits</p>
             </div>
+          </div>
+        </GlassCard>
+
+        {/* 🌟 Community Impact Score */}
+        <GlassCard className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-neon-cyan/20 flex items-center justify-center">
+              <TrendingUp className="w-7 h-7 text-emerald-400" />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-foreground">🌟 Community Impact Score</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">Based on volunteer hours, activities & credits earned</p>
+            </div>
+          </div>
+          <div className="text-center">
+            <p className="text-3xl font-bold text-emerald-400">{impactScore}</p>
+            <p className="text-[10px] text-muted-foreground">/ 100</p>
           </div>
         </GlassCard>
 

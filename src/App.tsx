@@ -26,6 +26,7 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminActivities from "./pages/AdminActivities";
 import AdminBlockchain from "./pages/AdminBlockchain";
 import AdminSettings from "./pages/AdminSettings";
+import StudentRecommendations from "./pages/StudentRecommendations";
 
 const queryClient = new QueryClient();
 

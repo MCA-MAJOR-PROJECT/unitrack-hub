@@ -3,7 +3,7 @@ import GlassCard from "@/components/GlassCard";
 import StatCard from "@/components/StatCard";
 import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
-import { Award, BookOpen, Star, TrendingUp, Clock, CheckCircle, ArrowRight, Zap, Sprout, Shield } from "lucide-react";
+import { Award, BookOpen, Star, TrendingUp, Clock, CheckCircle, ArrowRight, Zap, Sprout, Shield, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const activities = [
@@ -37,8 +37,11 @@ const StudentDashboard = () => {
             <Button variant="neon" onClick={() => navigate("/student/volunteering")}>
               <Sprout className="w-4 h-4" /> Apply Volunteering
             </Button>
-            <Button variant="neon-outline">
+            <Button variant="neon-outline" onClick={() => navigate("/student/activities")}>
               <Zap className="w-4 h-4" /> Enroll Activity
+            </Button>
+            <Button variant="glass" onClick={() => navigate("/student/recommendations")}>
+              <Sparkles className="w-4 h-4" /> AI Picks
             </Button>
           </div>
         </div>

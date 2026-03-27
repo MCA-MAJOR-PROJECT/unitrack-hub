@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, BookOpen, Award, User, LogOut, Menu,
   Users, FileCheck, Settings, Activity, Shield, ChevronLeft,
-  Wallet, Bell, Sprout, Wifi
+  Wallet, Bell, Sprout, Wifi, Sparkles
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileBottomNav from "@/components/MobileBottomNav";
@@ -22,6 +22,7 @@ const studentNav: NavItem[] = [
   { label: "Volunteering", href: "/student/volunteering", icon: Sprout },
   { label: "My Volunteering", href: "/student/volunteering/accepted", icon: Award },
   { label: "Activities", href: "/student/activities", icon: BookOpen },
+  { label: "AI Picks", href: "/student/recommendations", icon: Sparkles },
   { label: "Profile / Portfolio", href: "/student/profile", icon: User },
   { label: "Certificates", href: "/student/certificates", icon: Award },
   { label: "Settings", href: "/student/settings", icon: Settings },

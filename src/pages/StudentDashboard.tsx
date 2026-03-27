@@ -3,7 +3,7 @@ import GlassCard from "@/components/GlassCard";
 import StatCard from "@/components/StatCard";
 import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
-import { Award, BookOpen, Star, TrendingUp, Clock, CheckCircle, ArrowRight, Zap, Sprout, Shield } from "lucide-react";
+import { Award, BookOpen, Star, TrendingUp, Clock, CheckCircle, ArrowRight, Zap, Sprout, Shield, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const activities = [

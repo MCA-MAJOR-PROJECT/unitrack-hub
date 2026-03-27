@@ -1,65 +1,76 @@
 
 
-# UniTrack Hierarchy & Polish Update
+# AI Recommendations Page for UniTrack
 
-## 1. Navigation Reorder
+**Note**: Your prompt references Flutter/Firebase, but UniTrack is a **React + Vite + Tailwind** project. This plan adapts the feature to the existing tech stack using the same design system.
 
-**`src/components/DashboardLayout.tsx`** — Reorder `studentNav` array to: Home → Volunteering → My Volunteering → Activities → Profile/Portfolio → Certificates → Settings.
+## What Will Be Built
 
-**`src/components/MobileBottomNav.tsx`** — Reorder `items` array to: Home → Volunteer → Activities → Portfolio → Wallet.
+A new **Student Recommendations** page at `/student/recommendations` that uses a scoring algorithm to surface the best-matching volunteering opportunities and activities based on the student's profile (department, interests, skills).
 
-## 2. Index.tsx — Volunteering First Layout
+## New Files
 
-Reorder the sections inside `<main>`:
-1. Hero (unchanged)
-2. Volunteering Opportunities section (move up from position 3)
-3. Credit Progress + Recent Achievements grid (move up)
-4. Academic Activities section (move down)
+### 1. `src/lib/recommendationService.ts`
+- Recommendation scoring logic (pure TypeScript, no backend needed with current mock data)
+- Score calculation: +5 department match, +3 interest match, +2 skill match, +1 popularity
+- Exports `getRecommendedVolunteering()` and `getRecommendedActivities()` functions
+- Uses the same mock data arrays from VolunteeringFeed and ActivitiesFeed
+- Mock student profile: `{ department: "Computer Science", interests: ["AI", "Blockchain", "Sustainability"], skills: ["Leadership", "DSA", "Communication"] }`
 
-Remove the Stats Grid section (lines 86-101) — it duplicates dashboard data and clutters the landing page.
+### 2. `src/pages/StudentRecommendations.tsx`
+- Wrapped in `DashboardLayout` with `role="student"`
+- Header: "AI Recommendations" with sparkle/brain icon and subtitle
+- Two sections: **Recommended Volunteering** (top 5) and **Recommended Activities** (top 5)
+- Each card (GlassCard) shows: title, credits, department/category, match score badge ("⭐ Recommended"), and Apply/Enroll button
+- Match percentage indicator on each card
+- Empty state handling
+- Same dark neon glass styling as existing pages
 
-## 3. Reduce Glow Intensity (index.css)
+## Modified Files
 
-- `.neon-glow` box-shadow: reduce opacity values from `0.15`/`0.05` to `0.06`/`0.02`
-- `.neon-glow-blue`: same reduction
-- Across pages: change `hover:neon-glow` on non-interactive decorative cards — no change needed in CSS, the class itself gets toned down globally
+### 3. `src/pages/StudentDashboard.tsx`
+- Add "AI Recommendations" button in the header action buttons area (alongside existing "Apply Volunteering" and "Enroll Activity")
+- Uses a brain/sparkles icon, navigates to `/student/recommendations`
 
-## 4. Typography & Spacing
+### 4. `src/components/DashboardLayout.tsx`
+- Add nav item to `studentNav` array: `{ label: "AI Picks", href: "/student/recommendations", icon: Sparkles }` — placed after Activities
 
-**`src/pages/StudentDashboard.tsx`**: Change top-level `space-y-6` to `space-y-8`. Change section headers `text-sm font-semibold` to `text-base font-semibold` with `mb-2` after headings.
+### 5. `src/App.tsx`
+- Add route: `<Route path="/student/recommendations" element={<StudentRecommendations />} />`
 
-**`src/pages/Index.tsx`**: Section headers already `text-lg font-bold` — upgrade to `text-xl font-bold`.
+## Scoring Logic Detail
 
-**`src/pages/ActivitiesFeed.tsx`**: `space-y-6` → `space-y-8`.
-
-## 5. ActivitiesFeed — Volunteering Priority CTA
-
-Insert a subtle glass banner below the header section (after line 149):
-
+```text
+For each volunteering/activity item:
+  score = 0
+  if item.department matches student.department → +5
+  for each student.interest that appears in item title/category/description → +3
+  for each student.skill in item.skills array → +2
+  if item.currentParticipants/maxParticipants > 0.5 → +1 (popularity)
+  
+Sort DESC by score, return top 5
 ```
-<GlassCard className="!p-3 flex items-center justify-between border-emerald-500/20">
-  <div className="flex items-center gap-2">
-    <Sprout className="w-4 h-4 text-emerald-400" />
-    <span className="text-xs text-muted-foreground">🌱 Volunteering opportunities are prioritized for community engagement.</span>
-  </div>
-  <Button variant="neon-outline" size="sm" className="h-7 text-xs" onClick={() => navigate("/student/volunteering")}>
-    Browse Volunteering
-  </Button>
-</GlassCard>
+
+## UI Card Layout
+
+```text
+┌─────────────────────────────────┐
+│ ⭐ 92% Match                    │
+│ AI & Machine Learning Workshop  │
+│ AI & ML Dept. · 5 Credits       │
+│ "Intensive hands-on workshop…"  │
+│ Skills: Leadership, DSA         │
+│          [Enroll →]             │
+└─────────────────────────────────┘
 ```
 
-Import `Sprout` from lucide-react in ActivitiesFeed.
+## Files Summary
 
-## Files Modified
-
-| File | Change |
+| File | Action |
 |------|--------|
-| `src/components/DashboardLayout.tsx` | Reorder `studentNav` array |
-| `src/components/MobileBottomNav.tsx` | Reorder `items` array |
-| `src/pages/Index.tsx` | Remove stats grid, reorder sections, upgrade heading sizes |
-| `src/index.css` | Reduce glow opacity values |
-| `src/pages/StudentDashboard.tsx` | Spacing and typography tweaks |
-| `src/pages/ActivitiesFeed.tsx` | Add volunteering CTA banner, spacing update |
-
-No new files. No components removed. No new routes.
+| `src/lib/recommendationService.ts` | CREATE |
+| `src/pages/StudentRecommendations.tsx` | CREATE |
+| `src/pages/StudentDashboard.tsx` | EDIT — add AI button |
+| `src/components/DashboardLayout.tsx` | EDIT — add nav item |
+| `src/App.tsx` | EDIT — add route |
 

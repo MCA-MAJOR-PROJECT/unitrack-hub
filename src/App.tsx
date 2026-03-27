@@ -47,6 +47,7 @@ const App = () => (
           <Route path="/student/profile" element={<StudentProfile />} />
           <Route path="/student/activity/:id" element={<ActivityDetails />} />
           <Route path="/student/certificates" element={<CertificateWallet />} />
+          <Route path="/student/recommendations" element={<StudentRecommendations />} />
           <Route path="/student/settings" element={<StudentSettings />} />
           <Route path="/faculty" element={<FacultyDashboard />} />
           <Route path="/faculty/create" element={<FacultyCreateActivity />} />

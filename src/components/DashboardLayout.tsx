@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import {
   LayoutDashboard, BookOpen, Award, User, LogOut, Menu,
   Users, FileCheck, Settings, Activity, Shield, ChevronLeft,
-  Wallet, Bell, Sprout, Wifi
+  Wallet, Bell, Sprout, Wifi, Sparkles
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import MobileBottomNav from "@/components/MobileBottomNav";

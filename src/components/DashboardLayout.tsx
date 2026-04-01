@@ -30,6 +30,7 @@ const studentNav: NavItem[] = [
 
 const facultyNav: NavItem[] = [
   { label: "Dashboard", href: "/faculty", icon: LayoutDashboard },
+  { label: "Manage", href: "/faculty/manage", icon: Settings },
   { label: "Create Activity", href: "/faculty/create", icon: BookOpen },
   { label: "Create Volunteering", href: "/faculty/volunteering/create", icon: Sprout },
   { label: "Verify", href: "/faculty/verify", icon: FileCheck },

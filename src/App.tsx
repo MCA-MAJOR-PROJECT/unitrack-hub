@@ -26,6 +26,7 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminActivities from "./pages/AdminActivities";
 import AdminBlockchain from "./pages/AdminBlockchain";
 import AdminSettings from "./pages/AdminSettings";
+import AdminLogs from "./pages/AdminLogs";
 import StudentRecommendations from "./pages/StudentRecommendations";
 import FacultyManage from "./pages/FacultyManage";
 import FacultyManageDetail from "./pages/FacultyManageDetail";

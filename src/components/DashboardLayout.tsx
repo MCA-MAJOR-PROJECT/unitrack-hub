@@ -43,6 +43,7 @@ const adminNav: NavItem[] = [
   { label: "Users", href: "/admin/users", icon: Users },
   { label: "Activities", href: "/admin/activities", icon: BookOpen },
   { label: "Blockchain", href: "/admin/blockchain", icon: Shield },
+  { label: "Logs", href: "/admin/logs", icon: FileCheck },
   { label: "Settings", href: "/admin/settings", icon: Settings },
 ];
 

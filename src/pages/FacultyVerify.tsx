@@ -3,20 +3,39 @@ import GlassCard from "@/components/GlassCard";
 import BlockchainBadge from "@/components/BlockchainBadge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CheckCircle, XCircle, Search, FileCheck, Clock, Filter } from "lucide-react";
+import { CheckCircle, XCircle, Search, FileCheck, Clock, Info } from "lucide-react";
 import { useState } from "react";
 
-const verificationRequests = [
-  { id: 1, student: "Priya Sharma", rollNo: "CS2021045", activity: "AI Workshop 2025", type: "Workshop", credits: 3, submitted: "2h ago", proof: "Attendance + Quiz Score", status: "pending" as const },
-  { id: 2, student: "Rahul Verma", rollNo: "EC2022012", activity: "Research Methodology Seminar", type: "Seminar", credits: 2, submitted: "5h ago", proof: "Certificate Upload", status: "pending" as const },
-  { id: 3, student: "Anita Das", rollNo: "IT2021098", activity: "Blockchain Dev Bootcamp", type: "Bootcamp", credits: 5, submitted: "1d ago", proof: "Project Submission", status: "pending" as const },
-  { id: 4, student: "Vikram Singh", rollNo: "CS2022033", activity: "Community Outreach Program", type: "Service", credits: 2, submitted: "1d ago", proof: "Photo Evidence", status: "pending" as const },
-  { id: 5, student: "Meera Patel", rollNo: "ME2021056", activity: "AI Workshop 2025", type: "Workshop", credits: 3, submitted: "2d ago", proof: "Attendance Log", status: "verified" as const },
-  { id: 6, student: "Arjun Nair", rollNo: "CS2021078", activity: "Hackathon - BlockBuild", type: "Competition", credits: 4, submitted: "3d ago", proof: "Winner Certificate", status: "verified" as const },
+type RequestStatus = "pending" | "completed" | "verified";
+
+interface VerificationRequest {
+  id: number;
+  student: string;
+  rollNo: string;
+  activity: string;
+  type: "activity" | "volunteering";
+  credits: number;
+  submitted: string;
+  proof: string;
+  status: RequestStatus;
+  completedDate?: string;
+}
+
+const verificationRequests: VerificationRequest[] = [
+  { id: 1, student: "Priya Sharma", rollNo: "CS2021045", activity: "AI Workshop 2025", type: "activity", credits: 3, submitted: "2h ago", proof: "Attendance + Quiz Score", status: "pending" },
+  { id: 2, student: "Rahul Verma", rollNo: "EC2022012", activity: "Research Methodology Seminar", type: "activity", credits: 2, submitted: "5h ago", proof: "Certificate Upload", status: "pending" },
+  { id: 3, student: "Anita Das", rollNo: "IT2021098", activity: "Blockchain Dev Bootcamp", type: "activity", credits: 5, submitted: "1d ago", proof: "Project Submission", status: "pending" },
+  { id: 4, student: "Vikram Singh", rollNo: "CS2022033", activity: "Community Outreach Program", type: "volunteering", credits: 2, submitted: "1d ago", proof: "Photo Evidence", status: "pending" },
+  { id: 5, student: "Meera Patel", rollNo: "ME2021056", activity: "AI Workshop 2025", type: "activity", credits: 3, submitted: "2d ago", proof: "Attendance Log", status: "completed", completedDate: "Mar 28, 2025" },
+  { id: 6, student: "Arjun Nair", rollNo: "CS2021078", activity: "Hackathon - BlockBuild", type: "activity", credits: 4, submitted: "3d ago", proof: "Winner Certificate", status: "verified", completedDate: "Mar 25, 2025" },
+  { id: 7, student: "Kavitha Reddy", rollNo: "EC2021034", activity: "Campus Clean Drive", type: "volunteering", credits: 2, submitted: "3d ago", proof: "Coordinator Sign-off", status: "completed", completedDate: "Mar 26, 2025" },
+  { id: 8, student: "Sanjay Gupta", rollNo: "IT2022067", activity: "Mentorship Program", type: "volunteering", credits: 3, submitted: "4d ago", proof: "Mentee Feedback", status: "verified", completedDate: "Mar 22, 2025" },
 ];
 
+const filterTabs = ["all", "pending", "completed", "verified"] as const;
+
 const FacultyVerify = () => {
-  const [filter, setFilter] = useState<"all" | "pending" | "verified">("all");
+  const [filter, setFilter] = useState<typeof filterTabs[number]>("all");
   const [search, setSearch] = useState("");
 
   const filtered = verificationRequests.filter((r) => {
@@ -25,7 +44,18 @@ const FacultyVerify = () => {
     return true;
   });
 
-  const pendingCount = verificationRequests.filter((r) => r.status === "pending").length;
+  const counts = {
+    all: verificationRequests.length,
+    pending: verificationRequests.filter(r => r.status === "pending").length,
+    completed: verificationRequests.filter(r => r.status === "completed").length,
+    verified: verificationRequests.filter(r => r.status === "verified").length,
+  };
+
+  const tabIcons: Record<string, React.ReactNode> = {
+    pending: <Clock className="w-3 h-3" />,
+    completed: <Info className="w-3 h-3" />,
+    verified: <CheckCircle className="w-3 h-3" />,
+  };
 
   return (
     <DashboardLayout role="faculty" userName="Dr. Kumar">
@@ -35,7 +65,7 @@ const FacultyVerify = () => {
             <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
               <FileCheck className="w-6 h-6 text-primary" /> Verification Panel
             </h1>
-            <p className="text-sm text-muted-foreground mt-1">{pendingCount} pending verifications require your attention</p>
+            <p className="text-sm text-muted-foreground mt-1">{counts.pending} pending verifications require your attention</p>
           </div>
         </div>
 
@@ -50,8 +80,8 @@ const FacultyVerify = () => {
               className="pl-9 bg-input border-border"
             />
           </div>
-          <div className="flex gap-2">
-            {(["all", "pending", "verified"] as const).map((f) => (
+          <div className="flex gap-2 flex-wrap">
+            {filterTabs.map((f) => (
               <Button
                 key={f}
                 variant={filter === f ? "neon" : "neon-outline"}
@@ -59,9 +89,8 @@ const FacultyVerify = () => {
                 onClick={() => setFilter(f)}
                 className="capitalize"
               >
-                {f === "pending" && <Clock className="w-3 h-3" />}
-                {f === "verified" && <CheckCircle className="w-3 h-3" />}
-                {f} {f === "pending" && `(${pendingCount})`}
+                {tabIcons[f]}
+                {f} ({counts[f]})
               </Button>
             ))}
           </div>
@@ -89,11 +118,13 @@ const FacultyVerify = () => {
                   </td>
                   <td className="px-4 py-3 hidden md:table-cell">
                     <p className="text-sm text-foreground">{r.activity}</p>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">{r.type}</span>
+                    <div className="flex gap-1.5 mt-0.5">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium capitalize">{r.type}</span>
+                    </div>
                   </td>
                   <td className="px-4 py-3 text-xs text-muted-foreground hidden sm:table-cell">{r.proof}</td>
                   <td className="px-4 py-3 text-sm font-bold text-primary">+{r.credits}</td>
-                  <td className="px-4 py-3"><BlockchainBadge status={r.status} /></td>
+                  <td className="px-4 py-3"><BlockchainBadge status={r.status === "completed" ? "pending" : r.status === "verified" ? "verified" : "unverified"} /></td>
                   <td className="px-4 py-3">
                     {r.status === "pending" ? (
                       <div className="flex gap-1.5 justify-end">
@@ -104,8 +135,10 @@ const FacultyVerify = () => {
                           <XCircle className="w-3 h-3" /> Reject
                         </Button>
                       </div>
+                    ) : r.status === "completed" ? (
+                      <span className="text-xs text-amber-400 text-right block">Awaiting verification · {r.completedDate}</span>
                     ) : (
-                      <span className="text-xs text-muted-foreground text-right block">Completed</span>
+                      <span className="text-xs text-muted-foreground text-right block">Verified · {r.completedDate}</span>
                     )}
                   </td>
                 </tr>

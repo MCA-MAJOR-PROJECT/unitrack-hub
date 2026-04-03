@@ -64,9 +64,9 @@ const CertificateWallet = () => {
 
         {/* Summary Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <StatCard title="Total Certificates" value={certificates.length.toString()} icon={Award} />
-          <StatCard title="Total Credits" value={totalCredits.toString()} icon={BookOpen} />
-          <StatCard title="Verified" value={verifiedCount.toString()} icon={Shield} />
+          <StatCard label="Total Certificates" value={certificates.length} icon={Award} />
+          <StatCard label="Total Credits" value={totalCredits} icon={BookOpen} />
+          <StatCard label="Verified" value={verifiedCount} icon={Shield} />
         </div>
 
         {/* Category Filters */}

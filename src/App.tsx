@@ -26,6 +26,7 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminActivities from "./pages/AdminActivities";
 import AdminBlockchain from "./pages/AdminBlockchain";
 import AdminSettings from "./pages/AdminSettings";
+import AdminLogs from "./pages/AdminLogs";
 import StudentRecommendations from "./pages/StudentRecommendations";
 import FacultyManage from "./pages/FacultyManage";
 import FacultyManageDetail from "./pages/FacultyManageDetail";
@@ -63,6 +64,7 @@ const App = () => (
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/activities" element={<AdminActivities />} />
           <Route path="/admin/blockchain" element={<AdminBlockchain />} />
+          <Route path="/admin/logs" element={<AdminLogs />} />
           <Route path="/admin/settings" element={<AdminSettings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
